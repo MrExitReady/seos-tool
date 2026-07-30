@@ -17,13 +17,13 @@ Open `index.html` in a browser, or serve the folder:
 python3 -m http.server 8000
 ```
 
-## Deploy Option A — on the existing site via GoHighLevel (fisherandfisher.au/dual-exit-calculator)
+## Deploy Option A — on the existing site via GoHighLevel (fisherandfisher.au/asset-calculator)
 
 GHL can't host this multi-page static site directly, but it can serve the calculator at a path on the existing domain:
 
-1. In GHL: **Sites → your fisherandfisher.au website → New page**, set the page path to `dual-exit-calculator`.
+1. In GHL: **Sites → your fisherandfisher.au website → New page**, set the page path to `asset-calculator`.
 2. Add a full-width section with a **Custom Code** element.
-3. Paste the entire contents of **`ghl-embed/dual-exit-calculator-embed.html`** into it. Save and publish.
+3. Paste the entire contents of **`ghl-embed/asset-calculator-embed.html`** into it. Save and publish.
 
 The embed is fully self-contained (styles scoped under `.daxc`, no external files) and adapts automatically: if the visitor leaves the property fields blank it acts as a business-only valuation calculator, so one page serves both audiences. Add your own headline, supporting copy and a GHL form/CTA around it on the page — that's where the leads come from.
 
@@ -36,7 +36,7 @@ The site is pre-configured for `exit.fisherandfisher.au` (canonicals, sitemap, r
 3. In the DNS for `fisherandfisher.au` (wherever the domain is managed), add the **CNAME** record Cloudflare shows you: name `exit`, target `<project>.pages.dev`.
 4. In [Google Search Console](https://search.google.com/search-console), add `exit.fisherandfisher.au` as a property and submit `https://exit.fisherandfisher.au/sitemap.xml`.
 
-Running both deployments is the intended setup: the GHL page (`fisherandfisher.au/dual-exit-calculator`) for your funnel and podcast links, and this standalone site for Google search traffic.
+Running both deployments is the intended setup: the GHL page (`fisherandfisher.au/asset-calculator`) for your funnel and podcast links, and this standalone site for Google search traffic.
 
 ## Tracking who came from the calculators
 
@@ -45,17 +45,17 @@ Every outbound button and footer link back to `fisherandfisher.au` is tagged wit
 GoHighLevel attribution and Google Analytics will both show these visitors as coming from the calculator,
 per button. The GHL embed uses `utm_medium=embed`; the standalone site uses `utm_medium=referral`.
 
-**Two placeholder URLs must be updated** (marked with `TODO` comments in the three files that use them —
-both calculator pages and the GHL embed):
+Button destinations:
 
-- `https://fisherandfisher.au/scorecard` → your live scorecard page
-- `https://fisherandfisher.au/book-a-chat` → your live booking/calendar page
+- **Exit Readiness Scorecard** → `https://fisherandfisher.au/scorecard` (all calculators)
+- **Book a Dual-Asset Strategy Call** → the Dual-Asset Strategy Call booking widget (dual-asset calculator + GHL embed)
+- **Book a "Meet the Fishers" Call** → the Meet the Fishers booking widget (business-only calculator)
+- **Visit fisherandfisher.au** → homepage (all calculators + footers)
 
 ## Before launch checklist
 
 - [ ] Merge the PR, connect the repo to Cloudflare Pages, add the `exit` CNAME (steps above).
-- [ ] Replace the two placeholder URLs (`/scorecard`, `/book-a-chat`) with live GHL page URLs — search the repo for `TODO`.
-- [ ] Create the GHL page at `fisherandfisher.au/dual-exit-calculator` and paste in `ghl-embed/dual-exit-calculator-embed.html`.
+- [ ] Create the GHL page at `fisherandfisher.au/asset-calculator` and paste in `ghl-embed/asset-calculator-embed.html`.
 - [ ] Submit the sitemap in [Google Search Console](https://search.google.com/search-console).
 - [ ] Review the indicative industry multiples in `calculators.js` and adjust to taste — they're deliberately conservative general ranges.
 - [ ] Optional, once there's traffic: apply for Google AdSense (privacy policy and content pages are already in place). For this site, leads are worth far more than ad revenue — consider skipping ads entirely.
