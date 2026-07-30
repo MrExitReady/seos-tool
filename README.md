@@ -17,14 +17,24 @@ Open `index.html` in a browser, or serve the folder:
 python3 -m http.server 8000
 ```
 
-## Deploy (free) — Cloudflare Pages
+## Deploy Option A — on the existing site via GoHighLevel (fisherandfisher.au/dual-exit-calculator)
+
+GHL can't host this multi-page static site directly, but it can serve the calculator at a path on the existing domain:
+
+1. In GHL: **Sites → your fisherandfisher.au website → New page**, set the page path to `dual-exit-calculator`.
+2. Add a full-width section with a **Custom Code** element.
+3. Paste the entire contents of **`ghl-embed/dual-exit-calculator-embed.html`** into it. Save and publish.
+
+The embed is fully self-contained (styles scoped under `.daxc`, no external files) and adapts automatically: if the visitor leaves the property fields blank it acts as a business-only valuation calculator, so one page serves both audiences. Add your own headline, supporting copy and a GHL form/CTA around it on the page — that's where the leads come from.
+
+## Deploy Option B — standalone site (free) — Cloudflare Pages
 
 1. Push this repo to GitHub (done if you're reading this there).
 2. In Cloudflare → **Workers & Pages → Create → Pages → Connect to Git**, pick this repo.
 3. Build settings: framework **None**, build command **(empty)**, output directory **/** (root).
-4. Add your custom domain under the project's **Custom domains** tab.
+4. Add your custom domain under the project's **Custom domains** tab — e.g. a subdomain like `exit.fisherandfisher.au` (add a CNAME in your DNS), or a dedicated domain.
 
-Vercel, Netlify or Hostinger static hosting work identically.
+Vercel, Netlify or Hostinger static hosting work identically. For best SEO, the standalone site is stronger than the GHL embed (full FAQ schema and content pages); running both is fine — GHL page for your funnel, standalone site for search.
 
 ## Before launch checklist
 

@@ -1,0 +1,275 @@
+<!--
+  Dual-Asset Exit Calculator — GoHighLevel embed version
+  ======================================================
+  HOW TO USE (GoHighLevel):
+  1. Sites → your website → create a new page.
+  2. Set the page path to: dual-exit-calculator
+     (so it lives at fisherandfisher.au/dual-exit-calculator)
+  3. Add a full-width section, drop in a "Custom Code" element,
+     and paste this ENTIRE file into it. Save & publish.
+
+  Everything is self-contained: styles are scoped under .daxc so they
+  won't affect the rest of your site, and all calculations run in the
+  visitor's browser — nothing is stored or sent anywhere.
+
+  If the visitor leaves the property fields empty, the tool automatically
+  behaves as a business-only valuation calculator, so this one embed
+  serves both audiences.
+-->
+<div class="daxc">
+<style>
+  .daxc { --navy:#0f2438; --teal:#0e7c7b; --teal-dark:#0a5c5b; --gold:#c9a227;
+          --ink:#1d2b36; --muted:#5a6b78; --line:#dde5ea; --good:#1e7e4e;
+          max-width: 760px; margin: 0 auto; color: var(--ink); line-height: 1.6; }
+  .daxc, .daxc * { box-sizing: border-box; }
+  .daxc .daxc-panel { background:#fff; border:1px solid var(--line); border-radius:12px;
+          box-shadow:0 2px 12px rgba(15,36,56,.08); padding:28px; }
+  .daxc h2.daxc-title { color:var(--navy); font-size:1.35rem; margin:0 0 4px; }
+  .daxc .daxc-hint { color:var(--muted); font-size:.92rem; margin:0 0 18px; }
+  .daxc fieldset { border:1px solid var(--line); border-radius:10px;
+          padding:18px 20px 6px; margin:0 0 20px; }
+  .daxc legend { font-weight:700; color:var(--teal-dark); padding:0 8px; }
+  .daxc .daxc-field { margin-bottom:16px; }
+  .daxc label { display:block; font-weight:600; margin-bottom:5px; color:var(--navy); }
+  .daxc .daxc-help { font-size:.84rem; color:var(--muted); margin:4px 0 0; }
+  .daxc input[type=number], .daxc select { width:100%; padding:11px 13px; font-size:1rem;
+          border:1px solid #b9c6cf; border-radius:8px; background:#fff; color:var(--ink);
+          font-family:inherit; }
+  .daxc input:focus, .daxc select:focus { outline:2px solid var(--teal); border-color:var(--teal); }
+  .daxc .daxc-row { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  @media (max-width:640px){ .daxc .daxc-row { grid-template-columns:1fr; } }
+  .daxc .daxc-btn { display:inline-block; padding:13px 26px; border-radius:8px; font-weight:600;
+          font-size:1rem; cursor:pointer; border:none; background:var(--teal); color:#fff; }
+  .daxc .daxc-btn:hover { background:var(--teal-dark); }
+  .daxc .daxc-results { display:none; margin-top:24px; }
+  .daxc .daxc-results.daxc-visible { display:block; }
+  .daxc .daxc-headline { background:var(--navy); color:#fff; border-radius:12px;
+          padding:24px 26px; text-align:center; margin-bottom:18px; }
+  .daxc .daxc-headline .daxc-label { font-size:.85rem; text-transform:uppercase;
+          letter-spacing:1px; color:#b9c9d8; margin-bottom:4px; }
+  .daxc .daxc-headline .daxc-figure { font-size:1.9rem; font-weight:800; color:var(--gold); }
+  .daxc .daxc-headline .daxc-sub { color:#c6d4e0; font-size:.92rem; margin-top:6px; }
+  .daxc .daxc-tiles { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+          gap:14px; margin-bottom:18px; }
+  .daxc .daxc-tile { background:#fff; border:1px solid var(--line); border-radius:10px; padding:15px 17px; }
+  .daxc .daxc-tile .daxc-label { font-size:.83rem; color:var(--muted); margin-bottom:2px; }
+  .daxc .daxc-tile .daxc-value { font-size:1.2rem; font-weight:700; color:var(--navy); }
+  .daxc .daxc-tile .daxc-value.daxc-pos { color:var(--good); }
+  .daxc .daxc-tile .daxc-note { font-size:.8rem; color:var(--muted); margin-top:2px; }
+  .daxc .daxc-scenario { background:#fff; border:1px solid var(--line);
+          border-left:5px solid var(--teal); border-radius:10px; padding:18px 20px; margin-bottom:14px; }
+  .daxc .daxc-scenario h3 { color:var(--navy); margin:0 0 6px; font-size:1.1rem; }
+  .daxc .daxc-scenario ul { margin:8px 0 0 20px; padding:0; }
+  .daxc .daxc-scenario li { margin-bottom:5px; }
+  .daxc .daxc-big { font-weight:800; color:var(--teal-dark); }
+  .daxc .daxc-disclaimer { background:#fdf6e3; border:1px solid #ecd9a0; border-radius:8px;
+          padding:12px 16px; font-size:.86rem; color:#6b5a1e; margin-top:16px; }
+</style>
+
+<div class="daxc-panel">
+  <h2 class="daxc-title">Dual-Asset Exit Calculator</h2>
+  <p class="daxc-hint">All figures in Australian dollars. Own your premises too? Fill in both sections. Business only? Just fill in the first — the calculator adapts.</p>
+
+  <fieldset>
+    <legend>Asset 1 — The business</legend>
+    <div class="daxc-field">
+      <label for="daxc-industry">Industry</label>
+      <select id="daxc-industry"></select>
+    </div>
+    <div class="daxc-row">
+      <div class="daxc-field">
+        <label for="daxc-ebitda">Normalised EBITDA</label>
+        <input type="number" id="daxc-ebitda" min="0" step="1000" placeholder="e.g. 450000" inputmode="numeric">
+        <p class="daxc-help">Profit before interest, tax, depreciation &amp; amortisation, adjusted for owner add-backs — and after a market rent for your premises if you own them.</p>
+      </div>
+      <div class="daxc-field">
+        <label for="daxc-dependence">Owner dependence</label>
+        <select id="daxc-dependence">
+          <option value="medium" selected>Somewhat — capable team in place</option>
+          <option value="low">Low — runs without me</option>
+          <option value="high">High — it's mostly me</option>
+        </select>
+      </div>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>Asset 2 — The property (leave blank if you don't own your premises)</legend>
+    <div class="daxc-row">
+      <div class="daxc-field">
+        <label for="daxc-propvalue">Current market value of premises</label>
+        <input type="number" id="daxc-propvalue" min="0" step="10000" placeholder="e.g. 1800000" inputmode="numeric">
+      </div>
+      <div class="daxc-field">
+        <label for="daxc-debt">Debt secured against the property</label>
+        <input type="number" id="daxc-debt" min="0" step="10000" placeholder="e.g. 400000" inputmode="numeric">
+      </div>
+    </div>
+    <div class="daxc-field">
+      <label for="daxc-rent">Annual market rent (optional)</label>
+      <input type="number" id="daxc-rent" min="0" step="1000" placeholder="Leave blank to estimate at 6% of value" inputmode="numeric">
+      <p class="daxc-help">What a tenant would pay per year at arm's length. If blank, we estimate using a 6% yield — Australian commercial yields typically run 5–7.5%.</p>
+    </div>
+  </fieldset>
+
+  <button class="daxc-btn" id="daxc-calc" type="button">Calculate my exit position</button>
+
+  <div class="daxc-results" id="daxc-results">
+    <div class="daxc-headline">
+      <div class="daxc-label" id="daxc-headline-label">Your total dual-asset position</div>
+      <div class="daxc-figure" id="daxc-total">—</div>
+      <div class="daxc-sub" id="daxc-headline-sub">Indicative figures before tax and transaction costs</div>
+    </div>
+
+    <div class="daxc-tiles">
+      <div class="daxc-tile">
+        <div class="daxc-label">Business value range</div>
+        <div class="daxc-value" id="daxc-bizrange">—</div>
+        <div class="daxc-note" id="daxc-multnote">—</div>
+      </div>
+      <div class="daxc-tile" id="daxc-tile-equity">
+        <div class="daxc-label">Property equity</div>
+        <div class="daxc-value" id="daxc-equity">—</div>
+        <div class="daxc-note">Market value minus secured debt</div>
+      </div>
+      <div class="daxc-tile" id="daxc-tile-rent">
+        <div class="daxc-label">Annual market rent</div>
+        <div class="daxc-value daxc-pos" id="daxc-rentout">—</div>
+        <div class="daxc-note" id="daxc-yieldnote">—</div>
+      </div>
+    </div>
+
+    <div class="daxc-scenario" id="daxc-patha">
+      <h3>Path A — Sell the business, keep the freehold</h3>
+      <ul>
+        <li>Cash at settlement (business sale): <span class="daxc-big" id="daxc-pa-cash">—</span></li>
+        <li>Ongoing rent from the new owner as your tenant: <span class="daxc-big" id="daxc-pa-rent">—</span> per year</li>
+        <li>You retain a hard asset of <span class="daxc-big" id="daxc-pa-asset">—</span> that can keep appreciating</li>
+      </ul>
+      <p style="margin:10px 0 0;">A formal market lease, signed <em>before</em> the business goes to market, protects the business price and locks in that rent.</p>
+    </div>
+
+    <div class="daxc-scenario" id="daxc-pathb">
+      <h3>Path B — Sell everything</h3>
+      <ul>
+        <li>Cash at settlement (business + property equity): <span class="daxc-big" id="daxc-pb-cash">—</span></li>
+        <li>Ongoing income: <span class="daxc-big">none</span> — the capital must fund whatever comes next</li>
+      </ul>
+      <p style="margin:10px 0 0;" id="daxc-pb-compare">—</p>
+    </div>
+
+    <div class="daxc-disclaimer">
+      Indicative figures only, before capital gains tax, transaction costs, agent fees and any SMSF considerations. This is general information, not financial, tax or legal advice. Speak to licensed advisers before acting.
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  var MULTIPLES = {
+    manufacturing: { label: "Manufacturing & Engineering", low: 3.0, high: 5.0 },
+    professional:  { label: "Professional Services",       low: 2.5, high: 4.0 },
+    healthcare:    { label: "Healthcare & Allied Health",  low: 3.0, high: 5.0 },
+    construction:  { label: "Construction & Trades",       low: 2.0, high: 3.5 },
+    transport:     { label: "Transport & Logistics",       low: 2.5, high: 4.0 },
+    wholesale:     { label: "Wholesale & Distribution",    low: 2.5, high: 4.0 },
+    retail:        { label: "Retail",                      low: 1.5, high: 3.0 },
+    hospitality:   { label: "Hospitality & Food Service",  low: 1.5, high: 2.5 },
+    agriculture:   { label: "Agriculture & Agribusiness",  low: 3.0, high: 5.0 },
+    tech:          { label: "Technology / Software",       low: 4.0, high: 8.0 },
+    automotive:    { label: "Automotive & Repair",         low: 2.0, high: 3.5 },
+    other:         { label: "Other / Not Listed",          low: 2.0, high: 3.5 }
+  };
+
+  function valueBusiness(key, ebitda, dep) {
+    var ind = MULTIPLES[key] || MULTIPLES.other;
+    var lo = ind.low, hi = ind.high, mid = (lo + hi) / 2;
+    if (dep === "low") { lo = mid; }
+    else if (dep === "high") { hi = mid; lo = lo * 0.85; }
+    var size = 1;
+    if (ebitda > 0 && ebitda < 200000) size = 0.8;
+    else if (ebitda >= 1000000) size = 1.1;
+    lo = Math.round(lo * size * 10) / 10;
+    hi = Math.round(hi * size * 10) / 10;
+    return { low: ebitda * lo, high: ebitda * hi, multLow: lo, multHigh: hi };
+  }
+
+  function aud(n) {
+    return n.toLocaleString("en-AU", { style: "currency", currency: "AUD", maximumFractionDigits: 0 });
+  }
+  function range(a, b) { return aud(a) + " – " + aud(b); }
+  function num(id) {
+    var v = parseFloat(String(document.getElementById(id).value).replace(/[^0-9.\-]/g, ""));
+    return isNaN(v) ? 0 : v;
+  }
+  function $(id) { return document.getElementById(id); }
+
+  var sel = $("daxc-industry");
+  Object.keys(MULTIPLES).forEach(function (k) {
+    var o = document.createElement("option");
+    o.value = k; o.textContent = MULTIPLES[k].label;
+    sel.appendChild(o);
+  });
+
+  $("daxc-calc").addEventListener("click", function () {
+    var ebitda = num("daxc-ebitda");
+    var propValue = num("daxc-propvalue");
+    var debt = num("daxc-debt");
+    var rent = num("daxc-rent");
+
+    if (ebitda <= 0 && propValue <= 0) {
+      alert("Please enter at least your business EBITDA or your property value.");
+      return;
+    }
+
+    var v = valueBusiness(sel.value, ebitda, $("daxc-dependence").value);
+    var equity = Math.max(0, propValue - debt);
+    var hasProperty = propValue > 0;
+    var rentEstimated = rent <= 0 && hasProperty;
+    if (rentEstimated) rent = propValue * 0.06;
+
+    $("daxc-bizrange").textContent = range(v.low, v.high);
+    $("daxc-multnote").textContent = ebitda > 0
+      ? v.multLow + "× – " + v.multHigh + "× normalised EBITDA"
+      : "No EBITDA entered";
+
+    if (hasProperty) {
+      $("daxc-headline-label").textContent = "Your total dual-asset position";
+      $("daxc-total").textContent = range(v.low + equity, v.high + equity);
+      $("daxc-headline-sub").textContent = "Indicative business value range plus property equity, before tax and transaction costs";
+      $("daxc-tile-equity").style.display = "";
+      $("daxc-tile-rent").style.display = "";
+      $("daxc-patha").style.display = "";
+      $("daxc-pathb").style.display = "";
+      $("daxc-equity").textContent = aud(equity);
+      $("daxc-rentout").textContent = aud(rent);
+      $("daxc-yieldnote").textContent = rentEstimated
+        ? "Estimated at a 6% yield"
+        : ((rent / propValue) * 100).toFixed(1) + "% yield on value";
+      $("daxc-pa-cash").textContent = range(v.low, v.high);
+      $("daxc-pa-rent").textContent = aud(rent);
+      $("daxc-pa-asset").textContent = aud(propValue);
+      $("daxc-pb-cash").textContent = range(v.low + equity, v.high + equity);
+      $("daxc-pb-compare").textContent = equity > 0
+        ? "For context: keeping the property in Path A earns roughly " + ((rent / equity) * 100).toFixed(1) +
+          "% per year on the " + aud(equity) +
+          " of equity you'd otherwise cash out — before any capital growth. The right path depends on your income needs and tax position, not just the bigger cheque."
+        : "The right path depends on your income needs and tax position, not just the bigger cheque.";
+    } else {
+      $("daxc-headline-label").textContent = "Indicative business value range";
+      $("daxc-total").textContent = range(v.low, v.high);
+      $("daxc-headline-sub").textContent = "Based on " + v.multLow + "× to " + v.multHigh +
+        "× normalised EBITDA for your industry profile, before tax and transaction costs";
+      $("daxc-tile-equity").style.display = "none";
+      $("daxc-tile-rent").style.display = "none";
+      $("daxc-patha").style.display = "none";
+      $("daxc-pathb").style.display = "none";
+    }
+
+    var res = $("daxc-results");
+    res.classList.add("daxc-visible");
+    res.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+})();
+</script>
+</div>
