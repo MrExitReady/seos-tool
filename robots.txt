@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://exit.fisherandfisher.au/sitemap.xml

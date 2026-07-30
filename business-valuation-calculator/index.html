@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Business Valuation Calculator Australia — Free EBITDA Multiple Estimate</title>
+  <meta name="description" content="Free Australian business valuation calculator. Enter your industry, revenue and EBITDA to get an indicative market value range using SME earnings multiples — adjusted for owner dependence.">
+  <link rel="canonical" href="https://exit.fisherandfisher.au/business-valuation-calculator/">
+  <link rel="stylesheet" href="../styles.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How is a small business valued in Australia?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Most Australian small and medium businesses are valued using an earnings multiple: normalised EBITDA (earnings before interest, tax, depreciation and amortisation, adjusted for owner salary and one-off items) multiplied by an industry multiple, typically between 1.5 and 5 for SMEs. Higher multiples apply to larger businesses, recurring revenue, and businesses that run without the owner."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is EBITDA and how do I work mine out?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "EBITDA is your net profit before interest, tax, depreciation and amortisation. For a private business you also normalise it: add back your own above-market salary, one-off expenses, and personal costs run through the business, and deduct a market salary for the role you actually perform. The result is the profit a new owner could expect."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why does owner dependence lower a business's value?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "If the customers, know-how and key relationships all sit with the owner personally, a buyer is effectively buying a job plus a risk. Buyers pay lower multiples for owner-dependent businesses, and premiums for businesses with a management team, documented systems and revenue that does not rely on the founder."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is this calculator a formal valuation?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. It provides an indicative range using general industry multiples and should not be relied on for any transaction, dispute, tax or lending purpose. A formal valuation from a licensed valuer or qualified accountant considers your specific financials, contracts, market and risks."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "I own my business premises as well — does that change my exit?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Significantly. The property is valued separately from the business, and you can sell both together, sell the business and keep the freehold as a leased investment, or stage the sales over time. Use a dual-asset exit calculator to compare those paths side by side."
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Exit<span>Calculators</span>.au</a>
+    <nav class="site-nav">
+      <a href="/business-valuation-calculator/">Business Valuation</a>
+      <a href="/dual-asset-exit-calculator/">Dual-Asset Exit</a>
+      <a href="/about.html">About</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <h1>Business Valuation Calculator <span class="accent">(Australia)</span></h1>
+    <p class="lead">Get an indicative market value range for your business in under a minute, using the earnings-multiple method buyers and brokers actually use. Free, no signup, nothing stored.</p>
+  </div>
+</section>
+
+<div class="wrap narrow">
+
+  <div class="calc-panel">
+    <h2>Your business</h2>
+    <p class="hint">All figures in Australian dollars, based on your most recent full financial year.</p>
+
+    <div class="field">
+      <label for="bv-industry">Industry</label>
+      <select id="bv-industry"></select>
+    </div>
+
+    <div class="field-row">
+      <div class="field">
+        <label for="bv-revenue">Annual revenue</label>
+        <input type="number" id="bv-revenue" min="0" step="1000" placeholder="e.g. 2500000" inputmode="numeric">
+      </div>
+      <div class="field">
+        <label for="bv-ebitda">Normalised EBITDA</label>
+        <input type="number" id="bv-ebitda" min="0" step="1000" placeholder="e.g. 450000" inputmode="numeric">
+        <p class="help">Net profit + interest + tax + depreciation, adjusted for owner add-backs. Not sure? Use net profit plus your own salary above market rate.</p>
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="bv-dependence">How dependent is the business on you personally?</label>
+      <select id="bv-dependence">
+        <option value="medium" selected>Somewhat — I'm involved, but there's a capable team</option>
+        <option value="low">Not very — it runs day-to-day without me</option>
+        <option value="high">Very — key customers and know-how sit with me</option>
+      </select>
+    </div>
+
+    <button class="btn btn-primary" id="bv-calc">Calculate my valuation range</button>
+
+    <div class="results" id="bv-results">
+      <div class="result-headline" style="margin-top: 26px;">
+        <div class="label">Indicative business value range</div>
+        <div class="figure" id="bv-range">—</div>
+        <div class="sub" id="bv-mult-note"></div>
+      </div>
+
+      <div class="result-grid">
+        <div class="result-tile">
+          <div class="label">EBITDA used</div>
+          <div class="value" id="bv-ebitda-out">—</div>
+        </div>
+        <div class="result-tile">
+          <div class="label">EBITDA margin</div>
+          <div class="value" id="bv-margin-out">—</div>
+          <div class="note">EBITDA as a share of revenue</div>
+        </div>
+        <div class="result-tile">
+          <div class="label">Multiple range applied</div>
+          <div class="value" id="bv-mult-out">—</div>
+          <div class="note">Adjusted for owner dependence and size</div>
+        </div>
+      </div>
+
+      <div class="scenario">
+        <h3>What would move you toward the top of the range?</h3>
+        <ul>
+          <li><strong>Reduce owner dependence</strong> — a second-in-command and documented systems are the single biggest multiple lever for SMEs.</li>
+          <li><strong>Recurring or contracted revenue</strong> — service agreements and repeat customers de-risk the earnings a buyer is paying for.</li>
+          <li><strong>Clean, normalised financials</strong> — three years of accountant-prepared figures with clear add-backs.</li>
+          <li><strong>Customer concentration under control</strong> — no single customer above roughly 20% of revenue.</li>
+        </ul>
+      </div>
+
+      <div class="disclaimer-box">
+        This is an indicative estimate using general Australian SME multiple ranges. It is not a valuation and must not be relied on for any sale, purchase, tax, family law or lending decision. Engage a licensed valuer or qualified accountant for a formal opinion.
+      </div>
+
+      <!-- TODO: replace /scorecard and /book-a-chat below with your live GHL page URLs -->
+      <div class="lead-cta">
+        <h2>Your number is a starting point — what's next?</h2>
+        <p>See how sale-ready your business actually is, or talk it through with someone who's had this conversation hundreds of times.</p>
+        <div class="btn-row">
+          <a class="btn" href="https://fisherandfisher.au/scorecard?utm_source=exit-calculator&amp;utm_medium=referral&amp;utm_campaign=exit-tools&amp;utm_content=bv-results-scorecard">Take the Exit Readiness Scorecard</a>
+          <a class="btn" href="https://fisherandfisher.au/book-a-chat?utm_source=exit-calculator&amp;utm_medium=referral&amp;utm_campaign=exit-tools&amp;utm_content=bv-results-chat">Book a chat with David Fisher</a>
+          <a class="btn" href="https://fisherandfisher.au/?utm_source=exit-calculator&amp;utm_medium=referral&amp;utm_campaign=exit-tools&amp;utm_content=bv-results-site">Visit fisherandfisher.au</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="lead-cta">
+    <h2>Own the premises you operate from?</h2>
+    <p>Then this number is only half your exit. Model the full picture — business plus property, side by side — with the Dual-Asset Exit Calculator.</p>
+    <a class="btn" href="/dual-asset-exit-calculator/">Run my dual-asset exit →</a>
+  </div>
+
+  <div class="content">
+    <h2>How this calculator works</h2>
+    <p>The overwhelming majority of Australian private business sales are priced on a <strong>multiple of normalised EBITDA</strong>. A buyer asks two questions: how much profit will this business reliably produce for me, and how risky is that profit? The multiple is where the risk lives.</p>
+    <p>This calculator applies indicative multiple ranges by industry — for example, hospitality businesses typically transact between roughly 1.5&times; and 2.5&times; EBITDA, while established manufacturers can reach 3&times; to 5&times; — then adjusts the range for two of the biggest pricing factors in real deals:</p>
+    <ul>
+      <li><strong>Owner dependence.</strong> A business that runs without its owner sells in the upper half of its industry range; a business that <em>is</em> its owner sells at a discount, if it sells at all.</li>
+      <li><strong>Size.</strong> Below about $200k EBITDA, buyers apply compressed multiples. Above about $1m EBITDA, businesses attract professional and private-equity buyers who pay premiums.</li>
+    </ul>
+
+    <h2>Frequently asked questions</h2>
+
+    <div class="faq-item">
+      <h3>How is a small business valued in Australia?</h3>
+      <p>Most Australian SMEs are valued on an earnings multiple: normalised EBITDA multiplied by an industry multiple, typically between 1.5&times; and 5&times;. Asset-heavy or loss-making businesses may instead be valued on net assets, and fast-growing software businesses on revenue multiples — but for a profitable trading business, EBITDA multiples are the market standard.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3>What is "normalised" EBITDA?</h3>
+      <p>Your accounting profit, adjusted to show what a new owner would actually earn. Add back interest, tax, depreciation, amortisation, one-off costs, and any above-market owner salary or personal expenses — then deduct a fair market salary for the role you perform. Buyers and brokers call these adjustments "add-backs", and they're scrutinised heavily in due diligence.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3>Why does owner dependence matter so much?</h3>
+      <p>Because the buyer can't buy <em>you</em>. If relationships, pricing knowledge and delivery capability all sit in the owner's head, the earnings walk out the door at settlement. This is the most common reason otherwise-profitable businesses fail to sell — and the most fixable one, given a two-to-three-year runway before exit.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3>Is this a formal valuation I can rely on?</h3>
+      <p>No. It's an indicative range for planning conversations only. Formal valuations consider your actual financial statements, contracts, lease terms, market conditions and comparable transactions — and are the only thing you should rely on for a sale, purchase, tax event or dispute.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3>I also own my business premises — what should I do differently?</h3>
+      <p>Value them separately, and decide the property question <em>before</em> you go to market with the business. Whether you sell the freehold with the business, keep it and grant the buyer a market lease, or stage the two sales has major price, tax and retirement-income consequences. Our <a href="/dual-asset-exit-calculator/">Dual-Asset Exit Calculator</a> models the main paths side by side.</p>
+    </div>
+  </div>
+
+</div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot-links">
+      <a href="/business-valuation-calculator/">Business Valuation Calculator</a>
+      <a href="/dual-asset-exit-calculator/">Dual-Asset Exit Calculator</a>
+      <a href="/about.html">About</a>
+      <a href="/privacy.html">Privacy</a>
+      <a href="https://fisherandfisher.au/?utm_source=exit-calculator&amp;utm_medium=referral&amp;utm_campaign=exit-tools&amp;utm_content=footer">Fisher &amp; Fisher ↗</a>
+    </div>
+    <p class="legal">This calculator provides general information only, based on indicative industry figures. It does not constitute financial, legal, tax or valuation advice, and no result should be relied on for any transaction. Always obtain advice from licensed professionals who can consider your personal circumstances.</p>
+  </div>
+</footer>
+
+<script src="../calculators.js"></script>
+<script>
+  populateIndustrySelect("bv-industry");
+
+  document.getElementById("bv-calc").addEventListener("click", function () {
+    const industry = document.getElementById("bv-industry").value;
+    const revenue = readNumber("bv-revenue");
+    const ebitda = readNumber("bv-ebitda");
+    const dependence = document.getElementById("bv-dependence").value;
+
+    if (ebitda <= 0) {
+      alert("Please enter your normalised EBITDA — the calculation is based on it.");
+      return;
+    }
+
+    const v = valueBusiness(industry, ebitda, dependence);
+
+    document.getElementById("bv-range").textContent = fmtRange(v.low, v.high);
+    document.getElementById("bv-mult-note").textContent =
+      "Based on " + v.multLow + "× to " + v.multHigh + "× normalised EBITDA for your industry profile.";
+    document.getElementById("bv-ebitda-out").textContent = fmtAUD(ebitda);
+    document.getElementById("bv-margin-out").textContent =
+      revenue > 0 ? Math.round((ebitda / revenue) * 100) + "%" : "—";
+    document.getElementById("bv-mult-out").textContent = v.multLow + "× – " + v.multHigh + "×";
+
+    document.getElementById("bv-results").classList.add("visible");
+    document.getElementById("bv-results").scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+</script>
+
+</body>
+</html>
