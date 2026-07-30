@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
 
-# Replace YOURDOMAIN with your live domain before launch
-Sitemap: https://YOURDOMAIN.com.au/sitemap.xml
+Sitemap: https://exit.fisherandfisher.au/sitemap.xml

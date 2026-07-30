@@ -27,23 +27,38 @@ GHL can't host this multi-page static site directly, but it can serve the calcul
 
 The embed is fully self-contained (styles scoped under `.daxc`, no external files) and adapts automatically: if the visitor leaves the property fields blank it acts as a business-only valuation calculator, so one page serves both audiences. Add your own headline, supporting copy and a GHL form/CTA around it on the page — that's where the leads come from.
 
-## Deploy Option B — standalone site (free) — Cloudflare Pages
+## Deploy Option B — standalone SEO site at exit.fisherandfisher.au (free, Cloudflare Pages)
 
-1. Push this repo to GitHub (done if you're reading this there).
-2. In Cloudflare → **Workers & Pages → Create → Pages → Connect to Git**, pick this repo.
-3. Build settings: framework **None**, build command **(empty)**, output directory **/** (root).
-4. Add your custom domain under the project's **Custom domains** tab — e.g. a subdomain like `exit.fisherandfisher.au` (add a CNAME in your DNS), or a dedicated domain.
+The site is pre-configured for `exit.fisherandfisher.au` (canonicals, sitemap, robots.txt).
 
-Vercel, Netlify or Hostinger static hosting work identically. For best SEO, the standalone site is stronger than the GHL embed (full FAQ schema and content pages); running both is fine — GHL page for your funnel, standalone site for search.
+1. In Cloudflare → **Workers & Pages → Create → Pages → Connect to Git**, pick this repo and the `main` branch (after merging the PR). Build settings: framework **None**, build command **(empty)**, output directory **/** (root).
+2. In the Pages project → **Custom domains** → add `exit.fisherandfisher.au`.
+3. In the DNS for `fisherandfisher.au` (wherever the domain is managed), add the **CNAME** record Cloudflare shows you: name `exit`, target `<project>.pages.dev`.
+4. In [Google Search Console](https://search.google.com/search-console), add `exit.fisherandfisher.au` as a property and submit `https://exit.fisherandfisher.au/sitemap.xml`.
+
+Running both deployments is the intended setup: the GHL page (`fisherandfisher.au/dual-exit-calculator`) for your funnel and podcast links, and this standalone site for Google search traffic.
+
+## Tracking who came from the calculators
+
+Every outbound button and footer link back to `fisherandfisher.au` is tagged with UTM parameters
+(`utm_source=exit-calculator`, `utm_campaign=exit-tools`, plus a `utm_content` value naming the exact button).
+GoHighLevel attribution and Google Analytics will both show these visitors as coming from the calculator,
+per button. The GHL embed uses `utm_medium=embed`; the standalone site uses `utm_medium=referral`.
+
+**Two placeholder URLs must be updated** (marked with `TODO` comments in the three files that use them —
+both calculator pages and the GHL embed):
+
+- `https://fisherandfisher.au/scorecard` → your live scorecard page
+- `https://fisherandfisher.au/book-a-chat` → your live booking/calendar page
 
 ## Before launch checklist
 
-- [ ] Buy a domain (e.g. `dualassetexit.com.au` or similar) and connect it.
-- [ ] Replace `YOURDOMAIN` in `sitemap.xml` and `robots.txt` with the live domain.
+- [ ] Merge the PR, connect the repo to Cloudflare Pages, add the `exit` CNAME (steps above).
+- [ ] Replace the two placeholder URLs (`/scorecard`, `/book-a-chat`) with live GHL page URLs — search the repo for `TODO`.
+- [ ] Create the GHL page at `fisherandfisher.au/dual-exit-calculator` and paste in `ghl-embed/dual-exit-calculator-embed.html`.
 - [ ] Submit the sitemap in [Google Search Console](https://search.google.com/search-console).
-- [ ] Swap the `mailto:` link in the dual-asset page's lead CTA for a GoHighLevel form embed (marked with an HTML comment in `dual-asset-exit-calculator/index.html`).
 - [ ] Review the indicative industry multiples in `calculators.js` and adjust to taste — they're deliberately conservative general ranges.
-- [ ] Once there's some traffic: apply for Google AdSense (privacy policy and content pages required for approval are already in place).
+- [ ] Optional, once there's traffic: apply for Google AdSense (privacy policy and content pages are already in place). For this site, leads are worth far more than ad revenue — consider skipping ads entirely.
 
 ## Where the numbers live
 
