@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dual-Asset Exit Calculator — Business + Commercial Property Exit (Australia)</title>
+  <meta name="description" content="Own your business AND your commercial premises? Model your full exit: sell both, or sell the business and keep the freehold as a leased income asset. Free Australian dual-asset exit calculator.">
+  <link rel="stylesheet" href="../styles.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is a dual-asset exit?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A dual-asset exit is an exit strategy for business owners who also own their commercial premises. Instead of treating the business sale as the whole exit, the business and the property are valued and planned as two separate assets — which can be sold together, sold separately, or split so the owner sells the business and keeps the freehold as a leased investment producing rental income."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Should I sell my commercial property with my business?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It depends on your income needs, tax position and the buyer pool. Selling both maximises upfront cash but ends all future income. Keeping the property and granting the business buyer a market lease produces ongoing rent, keeps a hard asset, and can make the business itself easier to sell because the buyer needs less capital. Many owners hold the premises in a self-managed super fund, which adds significant tax considerations — get licensed advice before deciding."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does having a lease in place increase my business's sale value?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A formal, market-rate lease with reasonable tenure is one of the first things business buyers and their financiers check. Without one, the buyer has no security of premises and lenders may not fund the purchase. Putting a proper lease in place before going to market protects the business sale price and independently sets the rental income if you keep the property."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I estimate the market rent for my own premises?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Commercial property in Australia typically yields roughly 5% to 7.5% of its market value in annual net rent, varying by location and asset type. If you don't know your market rent, a commercial agent or valuer can provide a rental assessment — essential anyway before granting a lease to a business buyer."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is this calculator financial advice?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. It provides general, indicative figures only and ignores tax, transaction costs and your personal circumstances. Capital gains tax — including small business CGT concessions and superannuation strategies — can change dual-asset exit outcomes dramatically, so always obtain advice from licensed professionals."
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Exit<span>Calculators</span>.au</a>
+    <nav class="site-nav">
+      <a href="/business-valuation-calculator/">Business Valuation</a>
+      <a href="/dual-asset-exit-calculator/">Dual-Asset Exit</a>
+      <a href="/about.html">About</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <h1>Dual-Asset Exit Calculator</h1>
+    <p class="lead">You don't own one asset — you own two. Model your exit the way it actually works: the business and the freehold, side by side, with <span class="accent">both paths</span> in front of you.</p>
+  </div>
+</section>
+
+<div class="wrap narrow">
+
+  <div class="calc-panel">
+    <h2>Your two assets</h2>
+    <p class="hint">All figures in Australian dollars. Estimates are fine — this is for planning, not paperwork.</p>
+
+    <fieldset class="group">
+      <legend>Asset 1 — The business</legend>
+      <div class="field">
+        <label for="da-industry">Industry</label>
+        <select id="da-industry"></select>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label for="da-ebitda">Normalised EBITDA</label>
+          <input type="number" id="da-ebitda" min="0" step="1000" placeholder="e.g. 450000" inputmode="numeric">
+          <p class="help">Profit before interest, tax, depreciation &amp; amortisation, adjusted for owner add-backs — and after a market rent for your premises (see FAQ).</p>
+        </div>
+        <div class="field">
+          <label for="da-dependence">Owner dependence</label>
+          <select id="da-dependence">
+            <option value="medium" selected>Somewhat — capable team in place</option>
+            <option value="low">Low — runs without me</option>
+            <option value="high">High — it's mostly me</option>
+          </select>
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset class="group">
+      <legend>Asset 2 — The property</legend>
+      <div class="field-row">
+        <div class="field">
+          <label for="da-propvalue">Current market value of premises</label>
+          <input type="number" id="da-propvalue" min="0" step="10000" placeholder="e.g. 1800000" inputmode="numeric">
+        </div>
+        <div class="field">
+          <label for="da-debt">Debt secured against the property</label>
+          <input type="number" id="da-debt" min="0" step="10000" placeholder="e.g. 400000" inputmode="numeric">
+        </div>
+      </div>
+      <div class="field">
+        <label for="da-rent">Annual market rent (optional)</label>
+        <input type="number" id="da-rent" min="0" step="1000" placeholder="Leave blank to estimate at 6% of value" inputmode="numeric">
+        <p class="help">What a tenant would pay per year at arm's length. If blank, we estimate using a 6% yield — typical Australian commercial yields run roughly 5–7.5%.</p>
+      </div>
+    </fieldset>
+
+    <button class="btn btn-primary" id="da-calc">Show me both exit paths</button>
+
+    <div class="results" id="da-results">
+      <div class="result-headline" style="margin-top: 26px;">
+        <div class="label">Your total dual-asset position</div>
+        <div class="figure" id="da-total">—</div>
+        <div class="sub">Indicative business value range plus property equity, before tax and transaction costs</div>
+      </div>
+
+      <div class="result-grid">
+        <div class="result-tile">
+          <div class="label">Business value range</div>
+          <div class="value" id="da-bizrange">—</div>
+          <div class="note" id="da-multnote">—</div>
+        </div>
+        <div class="result-tile">
+          <div class="label">Property equity</div>
+          <div class="value" id="da-equity">—</div>
+          <div class="note">Market value minus secured debt</div>
+        </div>
+        <div class="result-tile">
+          <div class="label">Annual market rent</div>
+          <div class="value positive" id="da-rentout">—</div>
+          <div class="note" id="da-yieldnote">—</div>
+        </div>
+      </div>
+
+      <div class="scenario">
+        <h3>Path A — Sell the business, keep the freehold</h3>
+        <ul>
+          <li>Cash at settlement (business sale): <span class="big" id="pa-cash">—</span></li>
+          <li>Ongoing rental income from the new owner as your tenant: <span class="big" id="pa-rent">—</span> per year</li>
+          <li>You retain a hard asset of <span class="big" id="pa-asset">—</span> that can keep appreciating</li>
+        </ul>
+        <p style="margin-top: 10px;">The freehold becomes your income in life after the sale — and a formal market lease, signed <em>before</em> the business goes to market, both protects the business price and locks in that rent.</p>
+      </div>
+
+      <div class="scenario">
+        <h3>Path B — Sell everything</h3>
+        <ul>
+          <li>Cash at settlement (business + property equity): <span class="big" id="pb-cash">—</span></li>
+          <li>Ongoing income: <span class="big">none</span> — the capital must fund whatever comes next</li>
+        </ul>
+        <p style="margin-top: 10px;" id="pb-compare">—</p>
+      </div>
+
+      <div class="disclaimer-box">
+        Indicative figures only, before capital gains tax, transaction costs, agent fees and any SMSF considerations — all of which materially change dual-asset outcomes. This is general information, not financial, tax or legal advice. Speak to licensed advisers before acting.
+      </div>
+    </div>
+  </div>
+
+  <div class="lead-cta">
+    <h2>Want to think this through properly?</h2>
+    <p>The dual-asset exit is the core of the Asset First approach: treat the property as the first-class asset, not the afterthought. Hear it worked through, owner by owner, on The Founder's Horizon podcast.</p>
+    <!-- Replace the mailto below with your GoHighLevel form embed or podcast link when live -->
+    <a class="btn" href="mailto:david@davidgfisher.com.au?subject=Dual-asset%20exit%20enquiry">Get in touch →</a>
+  </div>
+
+  <div class="content">
+    <h2>Why your exit has two assets, not one</h2>
+    <p>If you own the premises your business trades from, you're not preparing one sale — you're managing a portfolio of two assets with different buyers, different values, different tax treatment and different timelines. Treating them as one lump is how owners leave money on the table.</p>
+    <p>The property is usually the quieter achiever: it doesn't depend on you turning up, its value doesn't collapse if a key customer leaves, and commercial freeholds have a deep pool of investor buyers entirely separate from business buyers. That's why the dual-asset question — <em>sell it, or keep it and become the landlord?</em> — deserves to be answered before the business ever goes to market.</p>
+
+    <h3>What Path A really means</h3>
+    <p>Selling the business while keeping the freehold converts you from owner-operator to investor. Your business buyer becomes your tenant under a market lease, your income continues without the 60-hour weeks, and the asset stays in the family (or the SMSF). The trade-off: your capital stays concentrated in one property, and you take on landlord obligations.</p>
+
+    <h3>What Path B really means</h3>
+    <p>Selling both maximises the cheque and cleanly ends the chapter. It suits owners who need the capital elsewhere, don't want landlord risk, or whose property has a better use for a new owner. The trade-off: every future dollar must now come from redeploying that capital.</p>
+
+    <h2>Frequently asked questions</h2>
+
+    <div class="faq-item">
+      <h3>What is a dual-asset exit?</h3>
+      <p>An exit planned around both of an owner-occupier's assets — the trading business and the commercial premises — rather than the business alone. The two are valued separately and can be sold together, separately, or split: business sold, freehold kept and leased.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3>Why does the calculator ask for EBITDA "after a market rent"?</h3>
+      <p>Because owner-occupiers often pay themselves no rent, or a token one, which inflates business profit. A buyer who will pay real rent values the business on profit <em>after</em> that rent. Deducting a market rent from your EBITDA is the honest way to see both numbers — and it's exactly what a buyer's accountant will do.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3>Should I put a lease in place before selling the business?</h3>
+      <p>In almost all cases where you're keeping the freehold, yes — before going to market. Buyers and their lenders need security of tenure, and the lease terms you set (rent, duration, options, outgoings) directly shape both the business's sale price and your future income. Get the lease drafted professionally and at arm's length.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3>My premises are in my SMSF — does this still apply?</h3>
+      <p>Yes, and the stakes are higher. Business real property held in a self-managed super fund has strict arm's-length leasing requirements and potentially significant tax advantages at exit. Decisions here should not be made without specialist SMSF and tax advice.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3>What about capital gains tax?</h3>
+      <p>CGT — and in particular the small business CGT concessions — can change the after-tax result of each path dramatically, sometimes reversing which path wins. This calculator deliberately shows pre-tax figures only. Model the tax with your accountant before deciding anything.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3>I don't own my premises — is there a calculator for me?</h3>
+      <p>Yes — use the <a href="/business-valuation-calculator/">Business Valuation Calculator</a> for an indicative value range on the business alone.</p>
+    </div>
+  </div>
+
+</div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot-links">
+      <a href="/business-valuation-calculator/">Business Valuation Calculator</a>
+      <a href="/dual-asset-exit-calculator/">Dual-Asset Exit Calculator</a>
+      <a href="/about.html">About</a>
+      <a href="/privacy.html">Privacy</a>
+    </div>
+    <p class="legal">This calculator provides general information only, based on indicative industry figures. It does not constitute financial, legal, tax or valuation advice, and no result should be relied on for any transaction. Always obtain advice from licensed professionals who can consider your personal circumstances.</p>
+  </div>
+</footer>
+
+<script src="../calculators.js"></script>
+<script>
+  populateIndustrySelect("da-industry");
+
+  document.getElementById("da-calc").addEventListener("click", function () {
+    const industry = document.getElementById("da-industry").value;
+    const ebitda = readNumber("da-ebitda");
+    const dependence = document.getElementById("da-dependence").value;
+    const propValue = readNumber("da-propvalue");
+    const debt = readNumber("da-debt");
+    let rent = readNumber("da-rent");
+
+    if (ebitda <= 0 && propValue <= 0) {
+      alert("Please enter at least your business EBITDA or your property value.");
+      return;
+    }
+
+    const v = valueBusiness(industry, ebitda, dependence);
+    const equity = Math.max(0, propValue - debt);
+    const rentEstimated = rent <= 0 && propValue > 0;
+    if (rentEstimated) rent = propValue * 0.06;
+    const yieldPct = propValue > 0 && rent > 0 ? ((rent / propValue) * 100).toFixed(1) : null;
+
+    document.getElementById("da-total").textContent =
+      fmtRange(v.low + equity, v.high + equity);
+    document.getElementById("da-bizrange").textContent = fmtRange(v.low, v.high);
+    document.getElementById("da-multnote").textContent =
+      ebitda > 0 ? v.multLow + "× – " + v.multHigh + "× normalised EBITDA" : "No EBITDA entered";
+    document.getElementById("da-equity").textContent = fmtAUD(equity);
+    document.getElementById("da-rentout").textContent = rent > 0 ? fmtAUD(rent) : "—";
+    document.getElementById("da-yieldnote").textContent =
+      yieldPct ? (rentEstimated ? "Estimated at a 6% yield" : yieldPct + "% yield on value") : "Enter a property value";
+
+    document.getElementById("pa-cash").textContent = fmtRange(v.low, v.high);
+    document.getElementById("pa-rent").textContent = rent > 0 ? fmtAUD(rent) : "—";
+    document.getElementById("pa-asset").textContent = fmtAUD(propValue);
+
+    document.getElementById("pb-cash").textContent = fmtRange(v.low + equity, v.high + equity);
+    if (rent > 0 && equity > 0) {
+      const yieldOnEquity = ((rent / equity) * 100).toFixed(1);
+      document.getElementById("pb-compare").textContent =
+        "For context: keeping the property in Path A earns roughly " + yieldOnEquity +
+        "% per year on the " + fmtAUD(equity) +
+        " of equity you'd otherwise cash out — before any capital growth. The right path depends on your income needs and tax position, not just the bigger cheque.";
+    } else {
+      document.getElementById("pb-compare").textContent =
+        "The right path depends on your income needs and tax position, not just the bigger cheque.";
+    }
+
+    document.getElementById("da-results").classList.add("visible");
+    document.getElementById("da-results").scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+</script>
+
+</body>
+</html>
