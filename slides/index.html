@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NoteDeck — Turn Plain Notes Into a Slide Deck in Seconds</title>
+  <meta name="description" content="Paste your meeting notes, outline or bullet points and get a clean, presentable slide deck instantly. Present fullscreen or export to PDF. Free to use, Pro unlocks every theme.">
+  <link rel="canonical" href="https://exit.fisherandfisher.au/slides/">
+  <link rel="stylesheet" href="slides.css">
+</head>
+<body>
+
+<header class="nd-header">
+  <div class="wrap">
+    <a class="brand" href="/slides/">Note<span>Deck</span></a>
+    <nav>
+      <a href="#app">App</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+      <button class="btn btn-ghost" id="licenseBtn" type="button">Enter license key</button>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <p class="kicker">No sign-up. No upload. Nothing leaves your browser.</p>
+    <h1>Turn plain notes into a slide deck in seconds</h1>
+    <p class="lead">Paste your meeting notes, talk outline or bullet points below. NoteDeck instantly turns them into a clean, presentable deck you can present fullscreen or export to PDF.</p>
+    <div class="btn-row">
+      <a class="btn btn-primary" href="#app">Make my deck — free</a>
+      <a class="btn btn-outline" href="#pricing">See Pro</a>
+    </div>
+  </div>
+</section>
+
+<section class="app-section" id="app">
+  <div class="wrap">
+    <div class="app-grid">
+
+      <div class="editor-pane">
+        <div class="pane-head">
+          <h2>Your notes</h2>
+          <button class="btn btn-ghost btn-sm" id="exampleBtn" type="button">Load example</button>
+        </div>
+        <textarea id="notes" spellcheck="false"
+          placeholder="Paste or type your notes here…&#10;&#10;Tips:&#10;# Big title slide&#10;## New slide heading&#10;- bullet point&#10;> a quote&#10;--- forces a slide break&#10;&#10;Or just paste plain notes — blank lines become new slides."></textarea>
+        <p class="hint">Everything is processed in your browser. Your notes are never uploaded anywhere.</p>
+      </div>
+
+      <div class="preview-pane">
+        <div class="pane-head">
+          <h2>Your deck</h2>
+          <div class="theme-picker" id="themePicker" aria-label="Theme"></div>
+        </div>
+
+        <div class="stage-wrap">
+          <div class="stage" id="stage"></div>
+        </div>
+
+        <div class="deck-controls">
+          <div class="nav-group">
+            <button class="btn btn-ghost btn-sm" id="prevBtn" type="button" aria-label="Previous slide">←</button>
+            <span class="counter" id="counter">1 / 1</span>
+            <button class="btn btn-ghost btn-sm" id="nextBtn" type="button" aria-label="Next slide">→</button>
+          </div>
+          <div class="action-group">
+            <button class="btn btn-primary btn-sm" id="presentBtn" type="button">▶ Present</button>
+            <button class="btn btn-outline btn-sm" id="pdfBtn" type="button">Export PDF</button>
+          </div>
+        </div>
+        <p class="hint" id="proHint"></p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="section alt" id="how">
+  <div class="wrap">
+    <h2>How it works</h2>
+    <div class="card-grid three">
+      <div class="card"><span class="step">1</span><h3>Paste your notes</h3><p>Meeting notes, a talk outline, dot points from your phone — anything. Plain text is fine; headings and bullets are understood automatically.</p></div>
+      <div class="card"><span class="step">2</span><h3>Pick a theme</h3><p>Your deck renders live as you type. Switch themes with one click — the content never changes, only the look.</p></div>
+      <div class="card"><span class="step">3</span><h3>Present or export</h3><p>Go fullscreen and drive it with your arrow keys, or export the whole deck to PDF and send it anywhere.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="pricing">
+  <div class="wrap">
+    <h2>Pricing</h2>
+    <p class="center-note">Free forever for quick decks. One small one-time payment for everything — no subscription.</p>
+    <div class="price-grid">
+      <div class="card price-card">
+        <h3>Free</h3>
+        <p class="price">$0</p>
+        <ul>
+          <li>✓ Instant notes-to-slides</li>
+          <li>✓ Up to 8 slides per deck</li>
+          <li>✓ 2 themes</li>
+          <li>✓ Fullscreen presenting</li>
+          <li>✓ PDF export (with NoteDeck badge)</li>
+        </ul>
+        <a class="btn btn-outline" href="#app">Start free</a>
+      </div>
+      <div class="card price-card featured">
+        <span class="badge">One-time payment</span>
+        <h3>Pro</h3>
+        <p class="price" id="proPrice">A$29</p>
+        <ul>
+          <li>✓ Everything in Free</li>
+          <li>✓ Unlimited slides per deck</li>
+          <li>✓ All 6 themes</li>
+          <li>✓ No badge on slides or PDF exports</li>
+          <li>✓ License works forever on this device &amp; any browser</li>
+        </ul>
+        <a class="btn btn-primary" id="buyBtn" href="#" rel="noopener">Get Pro</a>
+        <button class="btn btn-ghost btn-sm" id="haveKeyBtn" type="button">I already have a key</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section alt" id="faq">
+  <div class="wrap narrow">
+    <h2>FAQ</h2>
+    <details><summary>Where do my notes go?</summary><p>Nowhere. NoteDeck runs entirely in your browser — there is no server, no account and no upload. Close the tab and your notes stay on your device only.</p></details>
+    <details><summary>How do I get a PDF?</summary><p>Click <strong>Export PDF</strong> and choose “Save as PDF” in the print dialog. Each slide becomes one full landscape page.</p></details>
+    <details><summary>How does the Pro license work?</summary><p>After purchase you receive a license key by email. Click “Enter license key”, paste it once, and Pro is unlocked in that browser permanently. No subscription, no expiry.</p></details>
+    <details><summary>Can I use it offline?</summary><p>Yes — once the page has loaded, everything works without a connection.</p></details>
+  </div>
+</section>
+
+<footer class="nd-footer">
+  <div class="wrap">
+    <p>NoteDeck — a tiny tool that does one thing well. <a href="/">More free tools</a> · <a href="/privacy.html">Privacy</a></p>
+  </div>
+</footer>
+
+<!-- Present mode overlay -->
+<div class="presenter" id="presenter" hidden>
+  <div class="presenter-stage" id="presenterStage"></div>
+  <div class="presenter-bar">
+    <span id="presenterCounter"></span>
+    <span class="presenter-hint">← → to navigate · Esc to exit</span>
+  </div>
+</div>
+
+<!-- License modal -->
+<div class="modal-backdrop" id="licenseModal" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="licenseTitle">
+    <h3 id="licenseTitle">Enter your Pro license key</h3>
+    <p>Your key was emailed to you after purchase. It looks like <code>NDK-XXXXX-XXXXX-XXXXX</code>.</p>
+    <input type="text" id="licenseInput" placeholder="NDK-XXXXX-XXXXX-XXXXX" autocomplete="off">
+    <p class="license-msg" id="licenseMsg"></p>
+    <div class="btn-row">
+      <button class="btn btn-primary" id="activateBtn" type="button">Activate Pro</button>
+      <button class="btn btn-ghost" id="closeModalBtn" type="button">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- Print-only container: filled at export time -->
+<div id="printDeck" class="print-deck" aria-hidden="true"></div>
+
+<script src="app.js"></script>
+</body>
+</html>
